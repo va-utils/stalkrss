@@ -99,7 +99,7 @@ namespace StalkRSS
         private void SaveRSS()
         {
             BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream("stalkrss.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("stalkrss.dat", FileMode.Create))
             {
                 bf.Serialize(fs, feedList);
             }
@@ -220,7 +220,7 @@ namespace StalkRSS
             DialogResult dialogResult = MessageBox.Show($"Закрыть {Application.ProductName}?\nВы перестанете получать уведомления о новостях, пока не запустите приложение.", "Закрыть?", MessageBoxButtons.OKCancel);
             if(dialogResult == DialogResult.OK)
             {
-                SaveRSS();
+               // SaveRSS();
                 Application.Exit();
             }
         }
