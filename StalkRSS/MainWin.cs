@@ -35,6 +35,7 @@ namespace StalkRSS
         private void LoadRSSFeed(object sender, EventArgs e)
         {
             bs.Add((Feed)sender);
+            SaveRSS();
         }
 
         private async void addRSS_Click(object sender, EventArgs e)
@@ -227,6 +228,7 @@ namespace StalkRSS
         private void DelFeed_Click(object sender, EventArgs e)
         {
             bs.RemoveAt(ListRSS.SelectedIndex);
+            SaveRSS();
         }
 
         private void ListRSS_SelectedIndexChanged(object sender, EventArgs e)
