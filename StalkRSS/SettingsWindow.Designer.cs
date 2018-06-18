@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsWindow));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.ProxySwitch = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,6 +44,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.UpdateInterval = new System.Windows.Forms.NumericUpDown();
             this.PubDateSwitch = new System.Windows.Forms.CheckBox();
+            this.ProxySwitch = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProxyPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateInterval)).BeginInit();
@@ -81,10 +81,10 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(560, 330);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(560, 339);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -98,17 +98,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Если Ваше Интернет-соединение работает через прокси-сервер или цензурируется, Вы " +
     "можете настроить его в этом окне.\r\n";
-            // 
-            // ProxySwitch
-            // 
-            this.ProxySwitch.AutoSize = true;
-            this.ProxySwitch.Location = new System.Drawing.Point(3, 38);
-            this.ProxySwitch.Name = "ProxySwitch";
-            this.ProxySwitch.Size = new System.Drawing.Size(182, 17);
-            this.ProxySwitch.TabIndex = 1;
-            this.ProxySwitch.Text = "Работать через прокси (HTTP)";
-            this.ProxySwitch.UseVisualStyleBackColor = true;
-            this.ProxySwitch.CheckedChanged += new System.EventHandler(this.ProxySwitch_CheckedChanged);
             // 
             // label2
             // 
@@ -176,9 +165,9 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.SaveButton, 2);
             this.SaveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SaveButton.Location = new System.Drawing.Point(3, 279);
+            this.SaveButton.Location = new System.Drawing.Point(3, 291);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(554, 48);
+            this.SaveButton.Size = new System.Drawing.Size(554, 45);
             this.SaveButton.TabIndex = 7;
             this.SaveButton.Text = "Сохранить настройки";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -212,15 +201,15 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 252);
+            this.label8.Location = new System.Drawing.Point(3, 258);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(274, 24);
+            this.label8.Size = new System.Drawing.Size(274, 30);
             this.label8.TabIndex = 13;
             this.label8.Text = "Интервал обновления(мин):";
             // 
             // UpdateInterval
             // 
-            this.UpdateInterval.Location = new System.Drawing.Point(283, 255);
+            this.UpdateInterval.Location = new System.Drawing.Point(283, 261);
             this.UpdateInterval.Maximum = new decimal(new int[] {
             1440,
             0,
@@ -245,18 +234,30 @@
             this.PubDateSwitch.AutoSize = true;
             this.PubDateSwitch.Location = new System.Drawing.Point(3, 233);
             this.PubDateSwitch.Name = "PubDateSwitch";
-            this.PubDateSwitch.Size = new System.Drawing.Size(208, 16);
+            this.PubDateSwitch.Size = new System.Drawing.Size(208, 17);
             this.PubDateSwitch.TabIndex = 14;
             this.PubDateSwitch.Text = "Показывать дату и время новостей";
             this.PubDateSwitch.UseVisualStyleBackColor = true;
+            // 
+            // ProxySwitch
+            // 
+            this.ProxySwitch.AutoSize = true;
+            this.ProxySwitch.Location = new System.Drawing.Point(3, 38);
+            this.ProxySwitch.Name = "ProxySwitch";
+            this.ProxySwitch.Size = new System.Drawing.Size(182, 17);
+            this.ProxySwitch.TabIndex = 1;
+            this.ProxySwitch.Text = "Работать через прокси (HTTP)";
+            this.ProxySwitch.UseVisualStyleBackColor = true;
+            this.ProxySwitch.CheckedChanged += new System.EventHandler(this.ProxySwitch_CheckedChanged);
             // 
             // SettingsWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 330);
+            this.ClientSize = new System.Drawing.Size(560, 339);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "SettingsWindow";
             this.Text = "Настройки сети";
             this.Load += new System.EventHandler(this.ProxySettingsWindow_Load);

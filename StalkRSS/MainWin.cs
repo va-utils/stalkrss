@@ -10,6 +10,7 @@ namespace StalkRSS
     public partial class MainWin : Form
     {
         Feed CurrentFeed { get; set; }
+       // int CurrentFeedNumber { get; set; }
         List<Feed> feedList = new List<Feed>();
         BindingSource bs;
         public MainWin()
@@ -30,6 +31,11 @@ namespace StalkRSS
         {
             Feed f = (Feed)sender;
             notify.ShowBalloonTip(5000, f.Title, "Есть обновления", ToolTipIcon.None);
+
+            if( CurrentFeed!=null & f.Equals(CurrentFeed))
+            {
+                ShowRSS(feedList.IndexOf(CurrentFeed));
+            }
         }
 
         private void LoadRSSFeed(object sender, EventArgs e)
@@ -233,21 +239,29 @@ namespace StalkRSS
 
         private void ListRSS_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             DelFeed.Enabled = (ListRSS.SelectedIndex != -1) ? true : false;
             if (ListRSS.SelectedIndex != -1)
             {
-                ListNews.Items.Clear();
-                StringBuilder newsTitle = new StringBuilder();
-                for (int i = 0; i < feedList[ListRSS.SelectedIndex].Items.Count; ++i)
-                {
-                    if (Properties.Settings.Default.PubDateSwitch)
-                        newsTitle.Append(feedList[ListRSS.SelectedIndex].Items[i].PubDate + " | ");
-                    newsTitle.Append(feedList[ListRSS.SelectedIndex].Items[i].Title);
-                    ListNews.Items.Add(newsTitle.ToString());
-                    newsTitle.Clear();
-                }
                 CurrentFeed = feedList[ListRSS.SelectedIndex];
+                ShowRSS(ListRSS.SelectedIndex);
             }
+        }
+
+        private void ShowRSS(int element)
+        {
+            ListNews.Items.Clear();
+            StringBuilder newsTitle = new StringBuilder();
+            for (int i = 0; i < feedList[element].Items.Count; ++i)
+            {
+                if (Properties.Settings.Default.PubDateSwitch)
+                    newsTitle.Append(feedList[element].Items[i].PubDate + " | ");
+
+                newsTitle.Append(feedList[element].Items[i].Title);
+                ListNews.Items.Add(newsTitle.ToString());
+                newsTitle.Clear();
+            }
+          //  CurrentFeed = feedList[ListRSS.SelectedIndex];
         }
 
         private void UrlRSS_TextChanged(object sender, EventArgs e)

@@ -180,7 +180,7 @@ namespace StalkRSS
                 {
                     return;
                 }
-                Update?.Invoke(this, new EventArgs());
+                
                 LastPubDate = newPubDate;
                 Items = new ItemsRSS();
                 if (channelXmlNode != null)
@@ -192,12 +192,13 @@ namespace StalkRSS
                         {
                             case "item":
                                 ItemRSS chanItem = new ItemRSS(channelNode);
-                                Console.WriteLine("chanItem = " + chanItem.PubDate);
-                                Console.WriteLine("LastPubDate = " + LastPubDate);
+                             //   Console.WriteLine("chanItem = " + chanItem.PubDate);
+                             //   Console.WriteLine("LastPubDate = " + LastPubDate);
                                 Items.Add(chanItem);
                                 break;
                         }
                     }
+                    Update?.Invoke(this, new EventArgs());
                 }
                 else
                 {
