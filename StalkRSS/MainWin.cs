@@ -29,6 +29,7 @@ namespace StalkRSS
 
         private void UpdateShowMessage(object sender, EventArgs e)
         {
+            
             Feed f = (Feed)sender;
             notify.ShowBalloonTip(5000, f.Title, "Есть обновления", ToolTipIcon.None);
 
@@ -136,10 +137,16 @@ namespace StalkRSS
 
         private void MainWin_Load(object sender, EventArgs e)
         {
+            Application.ApplicationExit += new EventHandler(OnApplicationExit);
             string s = Application.ProductName + " " + Application.ProductVersion;
             Text = notify.Text = s;
             LoadRSS();
             CheckUpdates();
+        }
+
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            SaveRSS();
         }
 
         private void MinimizeToTray()
@@ -201,6 +208,7 @@ namespace StalkRSS
 
         private void MainWin_FormClosing(object sender, FormClosingEventArgs e)
         {
+            SaveRSS();
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;

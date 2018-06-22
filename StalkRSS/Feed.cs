@@ -37,12 +37,6 @@ namespace StalkRSS
         [field: NonSerialized]
         public event EventHandler Loaded;
 
-        [field: NonSerialized]
-        public event EventHandler StartLoad;
-
-        [field: NonSerialized]
-        public event EventHandler EndLoad;
-
         public Feed(string url)
         {
             LastPubDate = string.Empty;
@@ -103,10 +97,10 @@ namespace StalkRSS
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
                 XmlNode channelXmlNode = xmlDocument.GetElementsByTagName("channel")[0];
-                LastPubDate = xmlDocument.GetElementsByTagName("pubDate")[0].InnerText;
+               // LastPubDate = xmlDocument.GetElementsByTagName("pubDate")[0].InnerText;
                 if (channelXmlNode != null)
                 {
-                    StartLoad?.Invoke(this, new EventArgs());
+                    bool firstElement = true;
                     foreach (XmlNode channelNode in channelXmlNode.ChildNodes)
                     {
                         switch (channelNode.Name)
@@ -121,7 +115,13 @@ namespace StalkRSS
                                 Link = channelNode.InnerText;
                                 break;
                             case "item":
+
                                 ItemRSS chanItem = new ItemRSS(channelNode);
+                                if(firstElement)
+                                {
+                                    LastPubDate = chanItem.PubDate;
+                                    firstElement = false;
+                                }
                                 Items.Add(chanItem);
                                 break;
                         }
@@ -137,21 +137,14 @@ namespace StalkRSS
             {
                 throw e;
             }
-            finally
-            {
-                EndLoad?.Invoke(this, new EventArgs());
-                xmlReader.Close();
-            }
         }
 
         public async Task UpdateFeed()
         {
-            string newPubDate = string.Empty;
             System.IO.Stream stream = null;
             XmlTextReader xmlReader;
             
             WebClient wc = new WebClient();
-
 
             if (Properties.Settings.Default.ProxySwitch)
             {
@@ -175,26 +168,40 @@ namespace StalkRSS
                 xmlDocument.Load(xmlReader);
                 xmlReader.Close();
                 XmlNode channelXmlNode = xmlDocument.GetElementsByTagName("channel")[0];
-                newPubDate = xmlDocument.GetElementsByTagName("pubDate")[0].InnerText;
-                if (newPubDate.Equals(LastPubDate))
-                {
-                    return;
-                }
+
                 
-                LastPubDate = newPubDate;
-                Items = new ItemsRSS();
                 if (channelXmlNode != null)
                 {
-                    StartLoad?.Invoke(this, new EventArgs());
+                    bool firstElement = true;
                     foreach (XmlNode channelNode in channelXmlNode.ChildNodes)
                     {
+                        
                         switch (channelNode.Name)
                         {
                             case "item":
                                 ItemRSS chanItem = new ItemRSS(channelNode);
-                             //   Console.WriteLine("chanItem = " + chanItem.PubDate);
-                             //   Console.WriteLine("LastPubDate = " + LastPubDate);
-                                Items.Add(chanItem);
+
+                                if(firstElement)
+                                {
+                                //    Console.WriteLine("FIRST ELEMENT");
+                                    if(chanItem.PubDate.Equals(LastPubDate))
+                                    {
+                                //        Console.WriteLine("NO UPDATES");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        Items = new ItemsRSS();
+                                        Items.Add(chanItem);
+                                        LastPubDate = chanItem.PubDate;
+                                    }
+                                    firstElement = false;
+                                }
+                                else
+                                {
+                                //    Console.WriteLine("NEXT ELEMENT");
+                                    Items.Add(chanItem);
+                                }
                                 break;
                         }
                     }
@@ -209,13 +216,6 @@ namespace StalkRSS
             {
                 throw e;
             }
-            finally
-            {
-                EndLoad?.Invoke(this, new EventArgs());
-                xmlReader.Close();
-            }
-            
         }
-        
     }
 }
