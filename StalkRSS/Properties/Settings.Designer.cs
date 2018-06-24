@@ -142,5 +142,17 @@ namespace StalkRSS.Properties {
                 this["HasSetSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HasEventsShow {
+            get {
+                return ((bool)(this["HasEventsShow"]));
+            }
+            set {
+                this["HasEventsShow"] = value;
+            }
+        }
     }
 }

@@ -10,7 +10,6 @@ namespace StalkRSS
     public partial class MainWin : Form
     {
         Feed CurrentFeed { get; set; }
-       // int CurrentFeedNumber { get; set; }
         List<Feed> feedList = new List<Feed>();
         BindingSource bs;
         public MainWin()
@@ -21,27 +20,32 @@ namespace StalkRSS
             {
                 DataSource = feedList
             };
+           
             ListRSS.DataSource = bs;
             ListRSS.DisplayMember = "Title";
             TimerForUpdates.Interval =  Properties.Settings.Default.UpdateInterval * 60000;
-
+            Events.Text = (Properties.Settings.Default.HasEventsShow) ? "Уведомления вкл." : "Уведомления выкл.";
         }
 
-        private void UpdateShowMessage(object sender, EventArgs e)
+        private void UpdateShowMessage(object sender, EventArgs e) //есть новости
         {
             
             Feed f = (Feed)sender;
-            notify.ShowBalloonTip(5000, f.Title, "Есть обновления", ToolTipIcon.None);
+            if(Properties.Settings.Default.HasEventsShow)
+                notify.ShowBalloonTip(5000, f.Title, "Есть обновления", ToolTipIcon.None);
 
-            if( CurrentFeed!=null & f.Equals(CurrentFeed))
+            if( CurrentFeed!=null && f.Equals(CurrentFeed))
             {
                 ShowRSS(feedList.IndexOf(CurrentFeed));
             }
         }
 
-        private void LoadRSSFeed(object sender, EventArgs e)
+        private void LoadRSSFeed(object sender, EventArgs e) //добавление прошло успешно
         {
             bs.Add((Feed)sender);
+            int index = feedList.IndexOf((Feed)sender);
+            ListRSS.SelectedIndex = index;
+            ShowRSS(index);
             SaveRSS();
         }
 
@@ -56,7 +60,7 @@ namespace StalkRSS
             try
             {
                 Feed newFeed = new Feed(UrlRSS.Text);
-
+                
                 if (feedList.Contains(newFeed))
                     throw new AlreadyExistsFeedException();
 
@@ -125,8 +129,7 @@ namespace StalkRSS
                         feedList[i].Update += UpdateShowMessage;
                         feedList[i].Loaded += LoadRSSFeed;
                     }
-                    bs.DataSource = feedList;
-                    
+                    bs.DataSource = feedList;                   
                 }
             }
             catch(IOException ex)
@@ -142,6 +145,13 @@ namespace StalkRSS
             Text = notify.Text = s;
             LoadRSS();
             CheckUpdates();
+
+            if (feedList.Count!=0 && feedList[0]!=null)
+            {
+                CurrentFeed = feedList[0];
+                ShowRSS(0);
+            }
+                 
         }
 
         private void OnApplicationExit(object sender, EventArgs e)
@@ -234,7 +244,6 @@ namespace StalkRSS
             DialogResult dialogResult = MessageBox.Show($"Закрыть {Application.ProductName}?\nВы перестанете получать уведомления о новостях, пока не запустите приложение.", "Закрыть?", MessageBoxButtons.OKCancel);
             if(dialogResult == DialogResult.OK)
             {
-               // SaveRSS();
                 Application.Exit();
             }
         }
@@ -243,6 +252,8 @@ namespace StalkRSS
         {
             bs.RemoveAt(ListRSS.SelectedIndex);
             SaveRSS();
+            if (feedList.Count == 0)
+                ListNews.Items.Clear();
         }
 
         private void ListRSS_SelectedIndexChanged(object sender, EventArgs e)
@@ -269,7 +280,6 @@ namespace StalkRSS
                 ListNews.Items.Add(newsTitle.ToString());
                 newsTitle.Clear();
             }
-          //  CurrentFeed = feedList[ListRSS.SelectedIndex];
         }
 
         private void UrlRSS_TextChanged(object sender, EventArgs e)
@@ -298,6 +308,21 @@ namespace StalkRSS
         private void Update_Click(object sender, EventArgs e)
         {
             CheckUpdates();
+        }
+
+        private void Events_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.HasEventsShow == true)
+            {
+                Properties.Settings.Default.HasEventsShow = false;
+                Events.Text = "Уведомления выкл.";
+            }     
+            else
+            {
+                Properties.Settings.Default.HasEventsShow = true;
+                Events.Text = "Уведомления вкл.";
+            }
+                
         }
     }
 }

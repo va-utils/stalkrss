@@ -43,6 +43,12 @@ namespace StalkRSS
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            
+            if(ProxySwitch.Checked & string.IsNullOrWhiteSpace(ProxyURL.Text))
+            {
+                url_warning.Visible = true;
+                return;
+            }
             //--сохранение пароля
             byte[] barr_pass = Encoding.UTF8.GetBytes(ProxyPass.Text);
             string pass = Convert.ToBase64String(barr_pass);
@@ -65,12 +71,26 @@ namespace StalkRSS
         private void ProxySwitch_CheckedChanged(object sender, EventArgs e)
         {
             ProxyChange((ProxySwitch.Checked) ? true : false);
-            
+            if (!ProxySwitch.Checked)
+                url_warning.Visible = false;
+                
         }
 
         private void ProxyPort_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ProxyURL_TextChanged(object sender, EventArgs e)
+        {
+            if (ProxySwitch.Checked & string.IsNullOrWhiteSpace(ProxyURL.Text))
+            {
+                url_warning.Visible = true;
+            }
+            else
+            {
+                url_warning.Visible = false;
+            }
         }
     }
 }

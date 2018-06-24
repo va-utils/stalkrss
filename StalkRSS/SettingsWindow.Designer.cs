@@ -45,6 +45,7 @@
             this.UpdateInterval = new System.Windows.Forms.NumericUpDown();
             this.PubDateSwitch = new System.Windows.Forms.CheckBox();
             this.ProxySwitch = new System.Windows.Forms.CheckBox();
+            this.url_warning = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ProxyPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UpdateInterval)).BeginInit();
@@ -57,26 +58,28 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.ProxyURL, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyName, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyPass, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.SaveButton, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.ProxyPort, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.UpdateInterval, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.PubDateSwitch, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyName, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPass, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.SaveButton, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.ProxyPort, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.UpdateInterval, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.PubDateSwitch, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.ProxySwitch, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.url_warning, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 11;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
@@ -111,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 105);
+            this.label3.Location = new System.Drawing.Point(3, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 3;
@@ -120,7 +123,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 140);
+            this.label4.Location = new System.Drawing.Point(3, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 4;
@@ -129,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 175);
+            this.label5.Location = new System.Drawing.Point(3, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 13);
             this.label5.TabIndex = 5;
@@ -142,11 +145,12 @@
             this.ProxyURL.Name = "ProxyURL";
             this.ProxyURL.Size = new System.Drawing.Size(274, 20);
             this.ProxyURL.TabIndex = 2;
+            this.ProxyURL.TextChanged += new System.EventHandler(this.ProxyURL_TextChanged);
             // 
             // ProxyName
             // 
             this.ProxyName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProxyName.Location = new System.Drawing.Point(283, 143);
+            this.ProxyName.Location = new System.Drawing.Point(283, 163);
             this.ProxyName.Name = "ProxyName";
             this.ProxyName.Size = new System.Drawing.Size(274, 20);
             this.ProxyName.TabIndex = 4;
@@ -154,7 +158,7 @@
             // ProxyPass
             // 
             this.ProxyPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProxyPass.Location = new System.Drawing.Point(283, 178);
+            this.ProxyPass.Location = new System.Drawing.Point(283, 198);
             this.ProxyPass.Name = "ProxyPass";
             this.ProxyPass.PasswordChar = '*';
             this.ProxyPass.Size = new System.Drawing.Size(274, 20);
@@ -165,9 +169,9 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.SaveButton, 2);
             this.SaveButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SaveButton.Location = new System.Drawing.Point(3, 291);
+            this.SaveButton.Location = new System.Drawing.Point(3, 311);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(554, 45);
+            this.SaveButton.Size = new System.Drawing.Size(554, 25);
             this.SaveButton.TabIndex = 7;
             this.SaveButton.Text = "Сохранить настройки";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -175,7 +179,7 @@
             // 
             // ProxyPort
             // 
-            this.ProxyPort.Location = new System.Drawing.Point(283, 108);
+            this.ProxyPort.Location = new System.Drawing.Point(283, 128);
             this.ProxyPort.Maximum = new decimal(new int[] {
             65536,
             0,
@@ -191,7 +195,7 @@
             this.label7.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label7, 2);
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 210);
+            this.label7.Location = new System.Drawing.Point(3, 230);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(554, 20);
             this.label7.TabIndex = 12;
@@ -201,7 +205,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 258);
+            this.label8.Location = new System.Drawing.Point(3, 278);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(274, 30);
             this.label8.TabIndex = 13;
@@ -209,7 +213,7 @@
             // 
             // UpdateInterval
             // 
-            this.UpdateInterval.Location = new System.Drawing.Point(283, 261);
+            this.UpdateInterval.Location = new System.Drawing.Point(283, 281);
             this.UpdateInterval.Maximum = new decimal(new int[] {
             1440,
             0,
@@ -232,7 +236,7 @@
             // PubDateSwitch
             // 
             this.PubDateSwitch.AutoSize = true;
-            this.PubDateSwitch.Location = new System.Drawing.Point(3, 233);
+            this.PubDateSwitch.Location = new System.Drawing.Point(3, 253);
             this.PubDateSwitch.Name = "PubDateSwitch";
             this.PubDateSwitch.Size = new System.Drawing.Size(208, 17);
             this.PubDateSwitch.TabIndex = 14;
@@ -249,6 +253,18 @@
             this.ProxySwitch.Text = "Работать через прокси (HTTP)";
             this.ProxySwitch.UseVisualStyleBackColor = true;
             this.ProxySwitch.CheckedChanged += new System.EventHandler(this.ProxySwitch_CheckedChanged);
+            // 
+            // url_warning
+            // 
+            this.url_warning.AutoSize = true;
+            this.url_warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.url_warning.ForeColor = System.Drawing.Color.Red;
+            this.url_warning.Location = new System.Drawing.Point(283, 105);
+            this.url_warning.Name = "url_warning";
+            this.url_warning.Size = new System.Drawing.Size(205, 13);
+            this.url_warning.TabIndex = 15;
+            this.url_warning.Text = "Это поле не может быть пустым!";
+            this.url_warning.Visible = false;
             // 
             // SettingsWindow
             // 
@@ -287,5 +303,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown UpdateInterval;
         private System.Windows.Forms.CheckBox PubDateSwitch;
+        private System.Windows.Forms.Label url_warning;
     }
 }
