@@ -120,9 +120,7 @@ namespace StalkRSS
         private void SaveFormSize()
         {
             Properties.Settings.Default.MainFormSize = this.Size;
-            Properties.Settings.Default.HasSetSize = true;
-            Properties.Settings.Default.Save();
-       
+            Properties.Settings.Default.HasSetSize = true;       
         }
 
         private void LoadRSS()
@@ -176,6 +174,7 @@ namespace StalkRSS
         {
             SaveFormSize();
             SaveRSS();
+            Properties.Settings.Default.Save();
         }
 
         private void MinimizeToTray()
