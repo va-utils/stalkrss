@@ -16,6 +16,7 @@ namespace StalkRSS
         {
             Properties.Settings.Default.Reload();
             InitializeComponent();
+           
             bs = new BindingSource
             {
                 DataSource = feedList
@@ -116,6 +117,14 @@ namespace StalkRSS
             }
         }
 
+        private void SaveFormSize()
+        {
+            Properties.Settings.Default.MainFormSize = this.Size;
+            Properties.Settings.Default.HasSetSize = true;
+            Properties.Settings.Default.Save();
+       
+        }
+
         private void LoadRSS()
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -138,9 +147,18 @@ namespace StalkRSS
             }
         }
 
-        private void MainWin_Load(object sender, EventArgs e)
+        private void LoadFormSize()
         {
+            if(Properties.Settings.Default.HasSetSize)
+            {
+                this.Size = Properties.Settings.Default.MainFormSize;
+            }
+        }
+
+        private void MainWin_Load(object sender, EventArgs e)
+        {           
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
+            LoadFormSize();
             string s = Application.ProductName + " " + Application.ProductVersion;
             Text = notify.Text = s;
             LoadRSS();
@@ -156,6 +174,7 @@ namespace StalkRSS
 
         private void OnApplicationExit(object sender, EventArgs e)
         {
+            SaveFormSize();
             SaveRSS();
         }
 
