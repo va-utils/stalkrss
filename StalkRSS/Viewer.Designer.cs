@@ -41,6 +41,7 @@
             this.browser.Name = "browser";
             this.browser.Size = new System.Drawing.Size(703, 365);
             this.browser.TabIndex = 0;
+          //  this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
             this.browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.browser_Navigating);
             // 
             // Viewer
