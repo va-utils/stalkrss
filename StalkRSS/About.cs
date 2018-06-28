@@ -98,5 +98,17 @@ namespace StalkRSS
         {
 
         }
+
+        private void UpdateLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"https://github.com/va-utils/stalkrss/releases");
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось проверить наличие обновлений.");
+            }
+        }
     }
 }
