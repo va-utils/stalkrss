@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Drawing;
 
 namespace StalkRSS
 {
@@ -12,20 +13,23 @@ namespace StalkRSS
         Feed CurrentFeed { get; set; }
         List<Feed> feedList = new List<Feed>();
         BindingSource bs;
+        Image[] notifyMode;
+        
         public MainWin()
         {
             Properties.Settings.Default.Reload();
             InitializeComponent();
-           
+
+            notifyMode = new Image[]
+            {
+                Properties.Resources.NotifyOn,
+                Properties.Resources.NotifyOff
+            };
+
             bs = new BindingSource
             {
                 DataSource = feedList
             };
-           
-            ListRSS.DataSource = bs;
-            ListRSS.DisplayMember = "Title";
-            TimerForUpdates.Interval =  Properties.Settings.Default.UpdateInterval * 60000;
-            Events.Text = (Properties.Settings.Default.HasEventsShow) ? "Уведомления вкл." : "Уведомления выкл.";
         }
 
         private void UpdateShowMessage(object sender, EventArgs e) //есть новости
@@ -159,6 +163,23 @@ namespace StalkRSS
             LoadFormSize();
             string s = Application.ProductName + " " + Application.ProductVersion;
             Text = notify.Text = s;
+
+            ListRSS.DataSource = bs;
+            ListRSS.DisplayMember = "Title";
+            TimerForUpdates.Interval = Properties.Settings.Default.UpdateInterval * 60000;
+
+
+            if (Properties.Settings.Default.HasEventsShow)
+            {
+                EventSwitch.Text = "Уведомления вкл.";
+                EventSwitch.Image = notifyMode[0];
+            }
+            else
+            {
+                EventSwitch.Text = "Уведомления выкл.";
+                EventSwitch.Image = notifyMode[1];
+            }
+
             LoadRSS();
             CheckUpdates();
 
@@ -166,8 +187,7 @@ namespace StalkRSS
             {
                 CurrentFeed = feedList[0];
                 ShowRSS(0);
-            }
-                 
+            }              
         }
 
         private void OnApplicationExit(object sender, EventArgs e)
@@ -224,11 +244,13 @@ namespace StalkRSS
                 catch (System.Xml.XmlException)
                 {
                     MessageBox.Show("При обновлении ленты возникла ошибка разбора документа. Возможно, адрес ленты изменился ", "Добавление ленты");
+                    Status.Text = "Ошибка разбора документа...";
                 }
                 catch (Exception ex)
                 {
                     notify.ShowBalloonTip(5000, "Ошибка", "Не удалось проверить обновления для ленты " + feedList[i].Title + " из-за неизвестной ошибки", ToolTipIcon.Error);
                     notify.ShowBalloonTip(5000, "Ошибка", ex.Message, ToolTipIcon.Error);
+                    Status.Text = "Ошибка...";
                 }
             }
             ProgressBar.Visible = false;
@@ -333,12 +355,14 @@ namespace StalkRSS
             if (Properties.Settings.Default.HasEventsShow == true)
             {
                 Properties.Settings.Default.HasEventsShow = false;
-                Events.Text = "Уведомления выкл.";
+                EventSwitch.Text = "Уведомления выкл.";
+                EventSwitch.Image = notifyMode[1];
             }     
             else
             {
                 Properties.Settings.Default.HasEventsShow = true;
-                Events.Text = "Уведомления вкл.";
+                EventSwitch.Text = "Уведомления вкл.";
+                EventSwitch.Image = notifyMode[0];
             }
                 
         }

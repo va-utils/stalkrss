@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWin));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ListNews = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.StartUpdate = new System.Windows.Forms.ToolStripButton();
             this.Settings = new System.Windows.Forms.ToolStripButton();
             this.About = new System.Windows.Forms.ToolStripButton();
             this.Exit = new System.Windows.Forms.ToolStripButton();
-            this.Events = new System.Windows.Forms.ToolStripButton();
+            this.EventSwitch = new System.Windows.Forms.ToolStripButton();
+            this.ListNews = new System.Windows.Forms.ListBox();
             this.AddFeed = new System.Windows.Forms.Button();
             this.UrlRSS = new System.Windows.Forms.TextBox();
             this.ListRSS = new System.Windows.Forms.ListBox();
@@ -76,7 +76,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
@@ -86,32 +86,20 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(851, 396);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // ListNews
-            // 
-            this.ListNews.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListNews.FormattingEnabled = true;
-            this.ListNews.HorizontalScrollbar = true;
-            this.ListNews.Location = new System.Drawing.Point(5, 40);
-            this.ListNews.Margin = new System.Windows.Forms.Padding(5);
-            this.ListNews.Name = "ListNews";
-            this.tableLayoutPanel1.SetRowSpan(this.ListNews, 5);
-            this.ListNews.Size = new System.Drawing.Size(543, 331);
-            this.ListNews.TabIndex = 4;
-            this.ListNews.DoubleClick += new System.EventHandler(this.listNews_DoubleClick);
-            // 
             // toolStrip1
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.toolStrip1, 2);
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartUpdate,
             this.Settings,
             this.About,
             this.Exit,
-            this.Events});
+            this.EventSwitch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(851, 35);
+            this.toolStrip1.Size = new System.Drawing.Size(851, 30);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -121,7 +109,7 @@
             this.StartUpdate.Image = ((System.Drawing.Image)(resources.GetObject("StartUpdate.Image")));
             this.StartUpdate.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StartUpdate.Name = "StartUpdate";
-            this.StartUpdate.Size = new System.Drawing.Size(81, 32);
+            this.StartUpdate.Size = new System.Drawing.Size(89, 27);
             this.StartUpdate.Text = "Обновить";
             this.StartUpdate.Click += new System.EventHandler(this.Update_Click);
             // 
@@ -130,7 +118,7 @@
             this.Settings.Image = ((System.Drawing.Image)(resources.GetObject("Settings.Image")));
             this.Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(87, 37);
+            this.Settings.Size = new System.Drawing.Size(95, 27);
             this.Settings.Text = "Настройки";
             this.Settings.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -139,7 +127,7 @@
             this.About.Image = ((System.Drawing.Image)(resources.GetObject("About.Image")));
             this.About.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.About.Name = "About";
-            this.About.Size = new System.Drawing.Size(102, 37);
+            this.About.Size = new System.Drawing.Size(110, 27);
             this.About.Text = "О программе";
             this.About.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -148,28 +136,40 @@
             this.Exit.Image = ((System.Drawing.Image)(resources.GetObject("Exit.Image")));
             this.Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(61, 37);
+            this.Exit.Size = new System.Drawing.Size(69, 27);
             this.Exit.Text = "Выход";
             this.Exit.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // Events
+            // EventSwitch
             // 
-            this.Events.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.Events.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Events.Image = ((System.Drawing.Image)(resources.GetObject("Events.Image")));
-            this.Events.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Events.Name = "Events";
-            this.Events.Size = new System.Drawing.Size(110, 37);
-            this.Events.Text = "Уведомления вкл.";
-            this.Events.ToolTipText = "Уведомления";
-            this.Events.Click += new System.EventHandler(this.Events_Click);
+            this.EventSwitch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.EventSwitch.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.EventSwitch.Name = "EventSwitch";
+            this.EventSwitch.Size = new System.Drawing.Size(110, 27);
+            this.EventSwitch.Text = "Уведомления вкл.";
+            this.EventSwitch.ToolTipText = "Уведомления";
+            this.EventSwitch.Click += new System.EventHandler(this.Events_Click);
+            // 
+            // ListNews
+            // 
+            this.ListNews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListNews.FormattingEnabled = true;
+            this.ListNews.HorizontalScrollbar = true;
+            this.ListNews.Location = new System.Drawing.Point(5, 35);
+            this.ListNews.Margin = new System.Windows.Forms.Padding(5);
+            this.ListNews.Name = "ListNews";
+            this.tableLayoutPanel1.SetRowSpan(this.ListNews, 5);
+            this.ListNews.Size = new System.Drawing.Size(543, 336);
+            this.ListNews.TabIndex = 4;
+            this.ListNews.DoubleClick += new System.EventHandler(this.listNews_DoubleClick);
             // 
             // AddFeed
             // 
             this.AddFeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddFeed.Enabled = false;
+            this.AddFeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddFeed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.AddFeed.Location = new System.Drawing.Point(558, 100);
+            this.AddFeed.Location = new System.Drawing.Point(558, 95);
             this.AddFeed.Margin = new System.Windows.Forms.Padding(5);
             this.AddFeed.Name = "AddFeed";
             this.AddFeed.Size = new System.Drawing.Size(288, 25);
@@ -182,7 +182,7 @@
             // UrlRSS
             // 
             this.UrlRSS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.UrlRSS.Location = new System.Drawing.Point(558, 70);
+            this.UrlRSS.Location = new System.Drawing.Point(558, 65);
             this.UrlRSS.Margin = new System.Windows.Forms.Padding(5);
             this.UrlRSS.Name = "UrlRSS";
             this.UrlRSS.Size = new System.Drawing.Size(288, 20);
@@ -193,10 +193,10 @@
             // 
             this.ListRSS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ListRSS.FormattingEnabled = true;
-            this.ListRSS.Location = new System.Drawing.Point(558, 170);
+            this.ListRSS.Location = new System.Drawing.Point(558, 165);
             this.ListRSS.Margin = new System.Windows.Forms.Padding(5);
             this.ListRSS.Name = "ListRSS";
-            this.ListRSS.Size = new System.Drawing.Size(288, 201);
+            this.ListRSS.Size = new System.Drawing.Size(288, 206);
             this.ListRSS.TabIndex = 3;
             this.ListRSS.SelectedIndexChanged += new System.EventHandler(this.ListRSS_SelectedIndexChanged);
             // 
@@ -204,7 +204,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(558, 40);
+            this.label1.Location = new System.Drawing.Point(558, 35);
             this.label1.Margin = new System.Windows.Forms.Padding(5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(288, 20);
@@ -215,7 +215,7 @@
             // 
             this.DelFeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DelFeed.Enabled = false;
-            this.DelFeed.Location = new System.Drawing.Point(558, 135);
+            this.DelFeed.Location = new System.Drawing.Point(558, 130);
             this.DelFeed.Margin = new System.Windows.Forms.Padding(5);
             this.DelFeed.Name = "DelFeed";
             this.DelFeed.Size = new System.Drawing.Size(288, 25);
@@ -345,7 +345,7 @@
         private System.Windows.Forms.ToolStripButton Settings;
         private System.Windows.Forms.ToolStripButton About;
         private System.Windows.Forms.ToolStripButton Exit;
-        private System.Windows.Forms.ToolStripButton Events;
+        private System.Windows.Forms.ToolStripButton EventSwitch;
     }
 }
 

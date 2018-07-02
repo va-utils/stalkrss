@@ -83,6 +83,26 @@ namespace StalkRSS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NotifyOff {
+            get {
+                object obj = ResourceManager.GetObject("NotifyOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NotifyOn {
+            get {
+                object obj = ResourceManager.GetObject("NotifyOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stalklogo {
             get {
                 object obj = ResourceManager.GetObject("Stalklogo", resourceCulture);
