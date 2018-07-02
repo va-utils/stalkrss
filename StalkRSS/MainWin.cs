@@ -235,7 +235,6 @@ namespace StalkRSS
                     notify.ShowBalloonTip(5000, "Ошибка подключения", "Не удалось проверить обновления для ленты " + feedList[i].Title + " из-за проблем с сетью.", ToolTipIcon.Warning);
                     Status.Text = "Ошибка соединения...";
                 }
-
                 catch (System.Net.Sockets.SocketException)
                 {
                     notify.ShowBalloonTip(5000, "Ошибка подключения", "Не удалось проверить обновления для ленты " + feedList[i].Title + " из-за проблем с сетью.", ToolTipIcon.Warning);
