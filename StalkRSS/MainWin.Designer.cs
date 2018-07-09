@@ -46,16 +46,25 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.Status = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.ContextMenuForList = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.копироватьURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьВБраузереToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьСайтВБраузереToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TimerForUpdates = new System.Windows.Forms.Timer(this.components);
             this.notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.настроитьПроксиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextMenuForNews = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.копироватьURLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьВБраузереToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.ContextMenuForList.SuspendLayout();
             this.trayMenu.SuspendLayout();
+            this.ContextMenuForNews.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -162,6 +171,7 @@
             this.ListNews.Size = new System.Drawing.Size(543, 336);
             this.ListNews.TabIndex = 4;
             this.ListNews.DoubleClick += new System.EventHandler(this.listNews_DoubleClick);
+            this.ListNews.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListNews_MouseDown);
             // 
             // AddFeed
             // 
@@ -199,6 +209,7 @@
             this.ListRSS.Size = new System.Drawing.Size(288, 206);
             this.ListRSS.TabIndex = 3;
             this.ListRSS.SelectedIndexChanged += new System.EventHandler(this.ListRSS_SelectedIndexChanged);
+            this.ListRSS.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListRSS_MouseDown);
             // 
             // label1
             // 
@@ -252,6 +263,37 @@
             this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.ProgressBar.Visible = false;
             // 
+            // ContextMenuForList
+            // 
+            this.ContextMenuForList.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.копироватьURLToolStripMenuItem,
+            this.открытьВБраузереToolStripMenuItem,
+            this.открытьСайтВБраузереToolStripMenuItem});
+            this.ContextMenuForList.Name = "ContextMenuForList";
+            this.ContextMenuForList.Size = new System.Drawing.Size(211, 70);
+            this.ContextMenuForList.Text = "Show";
+            // 
+            // копироватьURLToolStripMenuItem
+            // 
+            this.копироватьURLToolStripMenuItem.Name = "копироватьURLToolStripMenuItem";
+            this.копироватьURLToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.копироватьURLToolStripMenuItem.Text = "Копировать URL";
+            this.копироватьURLToolStripMenuItem.Click += new System.EventHandler(this.CopyURLToolStripMenuItem_Click);
+            // 
+            // открытьВБраузереToolStripMenuItem
+            // 
+            this.открытьВБраузереToolStripMenuItem.Name = "открытьВБраузереToolStripMenuItem";
+            this.открытьВБраузереToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.открытьВБраузереToolStripMenuItem.Text = "Открыть в браузере";
+            this.открытьВБраузереToolStripMenuItem.Click += new System.EventHandler(this.OpenRSSToolStripMenuItem_Click);
+            // 
+            // открытьСайтВБраузереToolStripMenuItem
+            // 
+            this.открытьСайтВБраузереToolStripMenuItem.Name = "открытьСайтВБраузереToolStripMenuItem";
+            this.открытьСайтВБраузереToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.открытьСайтВБраузереToolStripMenuItem.Text = "Открыть сайт в браузере";
+            this.открытьСайтВБраузереToolStripMenuItem.Click += new System.EventHandler(this.OpenWebSiteToolStripMenuItem_Click);
+            // 
             // TimerForUpdates
             // 
             this.TimerForUpdates.Enabled = true;
@@ -300,6 +342,28 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
+            // ContextMenuForNews
+            // 
+            this.ContextMenuForNews.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.копироватьURLToolStripMenuItem1,
+            this.открытьВБраузереToolStripMenuItem1});
+            this.ContextMenuForNews.Name = "contextMenuForNews";
+            this.ContextMenuForNews.Size = new System.Drawing.Size(227, 70);
+            // 
+            // копироватьURLToolStripMenuItem1
+            // 
+            this.копироватьURLToolStripMenuItem1.Name = "копироватьURLToolStripMenuItem1";
+            this.копироватьURLToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
+            this.копироватьURLToolStripMenuItem1.Text = "Копировать URL ссылки";
+            this.копироватьURLToolStripMenuItem1.Click += new System.EventHandler(this.копироватьURLToolStripMenuItem1_Click);
+            // 
+            // открытьВБраузереToolStripMenuItem1
+            // 
+            this.открытьВБраузереToolStripMenuItem1.Name = "открытьВБраузереToolStripMenuItem1";
+            this.открытьВБраузереToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
+            this.открытьВБраузереToolStripMenuItem1.Text = "Открыть в браузере ссылку";
+            this.открытьВБраузереToolStripMenuItem1.Click += new System.EventHandler(this.открытьВБраузереToolStripMenuItem1_Click);
+            // 
             // MainWin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -317,7 +381,9 @@
             this.toolStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.ContextMenuForList.ResumeLayout(false);
             this.trayMenu.ResumeLayout(false);
+            this.ContextMenuForNews.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -346,6 +412,13 @@
         private System.Windows.Forms.ToolStripButton About;
         private System.Windows.Forms.ToolStripButton Exit;
         private System.Windows.Forms.ToolStripButton EventSwitch;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuForList;
+        private System.Windows.Forms.ToolStripMenuItem копироватьURLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьВБраузереToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьСайтВБраузереToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuForNews;
+        private System.Windows.Forms.ToolStripMenuItem копироватьURLToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem открытьВБраузереToolStripMenuItem1;
     }
 }
 

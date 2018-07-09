@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace StalkRSS
 {
@@ -14,6 +15,8 @@ namespace StalkRSS
         List<Feed> feedList = new List<Feed>();
         BindingSource bs;
         Image[] notifyMode;
+        int selectedIndexForContextMenu;
+        int selectedIndexForNewsContextMenu;
         
         public MainWin()
         {
@@ -179,6 +182,13 @@ namespace StalkRSS
                 EventSwitch.Text = "Уведомления выкл.";
                 EventSwitch.Image = notifyMode[1];
             }
+            
+            ContextMenuForList.Items.Insert(0, new ToolStripLabel("..."));
+            ContextMenuForNews.Items.Insert(0, new ToolStripLabel("..."));
+
+            //  ContextMenuForList.Items[0].ForeColor = 
+            ContextMenuForList.Items[0].ForeColor = Color.FromArgb(239, 127, 26);
+            ContextMenuForNews.Items[0].ForeColor = Color.FromArgb(239, 127, 26);
 
             LoadRSS();
             CheckUpdates();
@@ -369,6 +379,130 @@ namespace StalkRSS
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void CopyURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = selectedIndexForContextMenu;
+
+            if (i != -1)
+            {
+                Feed f = feedList[i];
+                Clipboard.SetText(f.URL);
+            }
+        }
+
+
+
+        private void ListRSS_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                int i = ListRSS.IndexFromPoint(e.X, e.Y);
+                Console.WriteLine(i);
+                if(i!=-1)
+                {
+                    selectedIndexForContextMenu = i;
+                    ContextMenuForList.Items[0].Text = feedList[i].Title;
+                    ContextMenuForList.Show(MousePosition);
+                    
+                }
+                
+            }
+        }
+
+        private void OpenRSSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = selectedIndexForContextMenu;
+            if (i != -1)
+            {
+                Feed f = feedList[i];
+                try
+                {
+                    Process p = Process.Start(f.URL);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Возникла ошибка.\n" + ex.Message);
+                }
+            }
+        }
+
+        private void OpenWebSiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = selectedIndexForContextMenu;
+            if (i != -1)
+            {
+                Feed f = feedList[i];
+                try
+                {
+                    Uri uri = new Uri(f.URL);
+                    string url = uri.GetLeftPart(UriPartial.Scheme) + uri.Host;
+                    Process p = Process.Start(url);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Возникла ошибка.\n" + ex.Message);
+                }
+            }
+        }
+
+        private void копироватьURLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int i = selectedIndexForNewsContextMenu;
+
+            if (i != -1)
+            {
+                string link = CurrentFeed.Items[selectedIndexForNewsContextMenu].Link;
+                if(!String.IsNullOrWhiteSpace(link))
+                    Clipboard.SetText(link);
+            }
+        }
+
+        private void ListNews_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                int i = ListNews.IndexFromPoint(e.X, e.Y);
+                Console.WriteLine(i);
+                if (i != -1)
+                {
+                    selectedIndexForNewsContextMenu = i;
+                    ContextMenuForNews.Items[0].Text = CreateTitle(CurrentFeed.Items[i].Title);
+                    ContextMenuForNews.Show(MousePosition);
+
+                }
+            }
+        }
+
+        private string CreateTitle(string s)
+        {
+            string res = s;
+            if(res.Length > 15)
+            {
+                res = res.Substring(0, 15);
+                res += "...";
+            }
+            Console.WriteLine(">>>" + res);
+            return res;
+        }
+
+        private void открытьВБраузереToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            int i = selectedIndexForNewsContextMenu;
+            if (i != -1)
+            {  
+                try
+                {
+                    string link = CurrentFeed.Items[selectedIndexForNewsContextMenu].Link;
+                    if (!string.IsNullOrWhiteSpace(link))
+                            Process.Start(link);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Возникла ошибка.\n" + ex.Message);
+                }
+            }
         }
     }
 }
