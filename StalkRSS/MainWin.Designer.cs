@@ -355,14 +355,14 @@
             this.копироватьURLToolStripMenuItem1.Name = "копироватьURLToolStripMenuItem1";
             this.копироватьURLToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
             this.копироватьURLToolStripMenuItem1.Text = "Копировать URL ссылки";
-            this.копироватьURLToolStripMenuItem1.Click += new System.EventHandler(this.копироватьURLToolStripMenuItem1_Click);
+            this.копироватьURLToolStripMenuItem1.Click += new System.EventHandler(this.CopyNewsURLToolStripMenuItem1_Click);
             // 
             // открытьВБраузереToolStripMenuItem1
             // 
             this.открытьВБраузереToolStripMenuItem1.Name = "открытьВБраузереToolStripMenuItem1";
             this.открытьВБраузереToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
             this.открытьВБраузереToolStripMenuItem1.Text = "Открыть в браузере ссылку";
-            this.открытьВБраузереToolStripMenuItem1.Click += new System.EventHandler(this.открытьВБраузереToolStripMenuItem1_Click);
+            this.открытьВБраузереToolStripMenuItem1.Click += new System.EventHandler(this.OpenNewsinWebBrowserToolStripMenuItem1_Click);
             // 
             // MainWin
             // 

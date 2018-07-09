@@ -447,7 +447,7 @@ namespace StalkRSS
             }
         }
 
-        private void копироватьURLToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void CopyNewsURLToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             int i = selectedIndexForNewsContextMenu;
 
@@ -487,7 +487,7 @@ namespace StalkRSS
             return res;
         }
 
-        private void открытьВБраузереToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void OpenNewsinWebBrowserToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             int i = selectedIndexForNewsContextMenu;
             if (i != -1)
