@@ -376,15 +376,9 @@ namespace StalkRSS
                 
         }
 
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
         private void CopyURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int i = selectedIndexForContextMenu;
-
             if (i != -1)
             {
                 Feed f = feedList[i];
